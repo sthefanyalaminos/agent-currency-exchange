@@ -29,3 +29,17 @@ User sends a message in the chat
 3. If it does, it triggers the **HTTP Request** tool, which queries **AwesomeAPI** and returns the current value of the currency.
 4. **Google Gemini** (via the Google AI API) generates the final response in natural language, using the query result.
 5. **Redis Chat Memory** stores the conversation history, so the agent remembers the context across following messages.
+
+## Tech stack
+| Layer | Tool |
+|---|---|
+| Orchestration | [n8n](https://n8n.io) |
+| LLM | Google Gemini (via Google AI API) |
+| Memory | Redis |
+| Exchange rate data | [AwesomeAPI - Economia](https://docs.awesomeapi.com.br/) |
+ 
+## How to import and run
+1. Have an n8n instance running (local, self-hosted, or n8n Cloud).
+2. In n8n, go to **Workflows → Import from File** and select this repository's `workflow.json`.
+3. Set up the credentials listed in the section below (Google Gemini, Redis, and optionally the AwesomeAPI token).
+4. Activate the workflow and chat with the agent through n8n's chat.
