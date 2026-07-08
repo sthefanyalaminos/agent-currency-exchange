@@ -10,7 +10,6 @@ O agente conversa em linguagem natural sobre câmbio e finanças. Sempre que o u
 ---
 
 ## Como funciona
-
 ```
 Usuário envia mensagem no chat
         │
@@ -34,10 +33,32 @@ Usuário envia mensagem no chat
 5. O **Redis Chat Memory** guarda o histórico da conversa, para que o agente lembre do contexto em mensagens seguintes.
 
 ## Tecnologias 
- 
 | Camada | Ferramenta |
 |---|---|
 | Orquestração | [n8n](https://n8n.io) |
 | LLM | Google Gemini (via Google AI API) |
 | Memória | Redis |
 | Dados de câmbio | [AwesomeAPI - Economia](https://docs.awesomeapi.com.br/) |
+
+## Como importar e rodar
+1. Tenha uma instância do n8n rodando (local, self-hosted ou n8n Cloud).
+2. No n8n, vá em **Workflows → Import from File** e selecione o `workflow.json` deste repositório.
+3. Configure as credenciais indicadas na seção abaixo (Google Gemini, Redis e, opcionalmente, o token da AwesomeAPI).
+4. Ative o workflow e converse com o agente pelo chat do n8n.
+
+## Credenciais e variáveis de ambiente
+ 
+Veja o arquivo [`.env.example`](./.env.example) para a lista completa. Resumo:
+ 
+| Variável | Onde usar no n8n | Obrigatório? |
+|---|---|---|
+| `GEMINI_API_KEY` | Credencial "Google Gemini(PaLM) Api account" | ✅ Sim |
+| `REDIS_HOST` / `REDIS_PORT` / `REDIS_PASSWORD` | Credencial "Redis account" | ✅ Sim |
+| `AWESOMEAPI_TOKEN` | Query param `token` na URL do node HTTP Request | ⚠️ Opcional* |
+ 
+\* *A AwesomeAPI funciona sem token, mas as respostas ficam em cache de 1 minuto. Com um token gratuito, você tem até 100 mil requisições/mês sem cache. Gere o seu em [awesomeapi.com.br](https://awesomeapi.com.br).*
+ 
+> ⚠️ **Nota de segurança:** o `workflow.json` exportado pelo n8n **não** inclui os valores reais das credenciais (Gemini/Redis ficam apenas como referência).
+
+## Autoria
+Desenvolvido por Sthefany Alaminos
