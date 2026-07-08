@@ -43,3 +43,17 @@ User sends a message in the chat
 2. In n8n, go to **Workflows → Import from File** and select this repository's `workflow.json`.
 3. Set up the credentials listed in the section below (Google Gemini, Redis, and optionally the AwesomeAPI token).
 4. Activate the workflow and chat with the agent through n8n's chat.
+
+## Credentials and environment variables
+ 
+See the [`.env.example`](./.env.example) file for the full list. Summary:
+ 
+| Variable | Where to use it in n8n | Required? |
+|---|---|---|
+| `GEMINI_API_KEY` | "Google Gemini(PaLM) Api account" credential | ✅ Yes |
+| `REDIS_HOST` / `REDIS_PORT` / `REDIS_PASSWORD` | "Redis account" credential | ✅ Yes |
+| `AWESOMEAPI_TOKEN` | `token` query param in the HTTP Request node's URL | ⚠️ Optional* |
+ 
+\* *AwesomeAPI works without a token, but responses are cached for 1 minute. With a free token, you get up to 100,000 requests/month without caching. Get yours at [awesomeapi.com.br](https://awesomeapi.com.br).*
+ 
+> ⚠️ **Security note:** the `workflow.json` exported by n8n does **not** include the actual credential values (Gemini/Redis remain only as references).
