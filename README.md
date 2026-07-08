@@ -6,3 +6,38 @@ Automação low-code construída no n8n: Agente de IA especialista em finanças 
 
 
 O agente conversa em linguagem natural sobre câmbio e finanças. Sempre que o usuário pergunta pela cotação de uma moeda, o agente usa HTTP Request para buscar o valor atualizado na AwesomeAPI antes de responder, para consultar dados reais. Além disso, o agente mantém o histórico da conversa através de memória persistente no Redis, permitindo diálogos com contexto.
+
+---
+
+## Como funciona
+
+```
+Usuário envia mensagem no chat
+        │
+        ▼
+ ┌────────────────────── AI Agent ──────────────────────┐
+ │                                                        │
+ │   🧩 Google Gemini Chat Model  → gera as respostas     │
+ │   💾 Redis Chat Memory         → mantém o contexto     │
+ │   🌐 HTTP Request Tool         → busca cotações reais  │
+ │      (AwesomeAPI)                 quando necessário    │
+ │                                                        │
+ └────────────────────────────────────────────────────────┘
+        │
+        ▼
+   Resposta ao usuário
+```
+1. O usuário envia uma pergunta pelo chat (ex: "qual a cotação do dólar hoje?").
+2. O **AI Agent** (LangChain Agent node) recebe a mensagem e decide, com base no seu system prompt, se precisa consultar uma cotação.
+3. Se precisar, ele aciona a tool **HTTP Request**, que consulta a **AwesomeAPI** e retorna o valor atualizado da moeda.
+4. O **Google Gemini** (via Google AI API) gera a resposta final em linguagem natural, usando o resultado da consulta.
+5. O **Redis Chat Memory** guarda o histórico da conversa, para que o agente lembre do contexto em mensagens seguintes.
+
+## Tecnologias 
+ 
+| Camada | Ferramenta |
+|---|---|
+| Orquestração | [n8n](https://n8n.io) |
+| LLM | Google Gemini (via Google AI API) |
+| Memória | Redis |
+| Dados de câmbio | [AwesomeAPI - Economia](https://docs.awesomeapi.com.br/) |
