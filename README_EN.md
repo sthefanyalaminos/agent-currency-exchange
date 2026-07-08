@@ -57,3 +57,7 @@ See the [`.env.example`](./.env.example) file for the full list. Summary:
 \* *AwesomeAPI works without a token, but responses are cached for 1 minute. With a free token, you get up to 100,000 requests/month without caching. Get yours at [awesomeapi.com.br](https://awesomeapi.com.br).*
  
 > ⚠️ **Security note:** the `workflow.json` exported by n8n does **not** include the actual credential values (Gemini/Redis remain only as references).
+
+
+## Authorship
+Developed by Sthefany Alaminos.
