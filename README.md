@@ -1,9 +1,12 @@
 # 💱 Agente de IA para Cotação de Moedas (n8n)
-[Translate to English]()
+[Translate to English](https://github.com/sthefanyalaminos/agent-currency-exchange/blob/main/README_EN.md)
 
 Automação low-code construída no n8n: Agente de IA especialista em finanças e câmbio, com memória de conversa e capacidade de consultar cotações de moedas em tempo real.
 
+<img src="assets/images/1.png">
+<img src="assets/images/2.png">
 
+---
 O agente conversa em linguagem natural sobre câmbio e finanças. Sempre que o usuário pergunta pela cotação de uma moeda, o agente usa HTTP Request para buscar o valor atualizado na AwesomeAPI antes de responder, para consultar dados reais. Além disso, o agente mantém o histórico da conversa através de memória persistente no Redis, permitindo diálogos com contexto.
 
 ---
@@ -60,4 +63,4 @@ Veja o arquivo [`.env.example`](./.env.example) para a lista completa. Resumo:
 > ⚠️ **Nota de segurança:** o `workflow.json` exportado pelo n8n **não** inclui os valores reais das credenciais (Gemini/Redis ficam apenas como referência).
 
 ## Autoria
-Desenvolvido por Sthefany Alaminos
+Desenvolvido por Sthefany Alaminos.
